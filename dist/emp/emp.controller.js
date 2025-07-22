@@ -15,21 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmpController = void 0;
 const common_1 = require("@nestjs/common");
 const emp_service_1 = require("./emp.service");
+const registerdto_1 = require("./registerdto/registerdto");
 let EmpController = class EmpController {
     empService;
     constructor(empService) {
         this.empService = empService;
     }
-    create(body) {
-        if (!body.username || !body.phonenumber || !body.address) {
-            return { message: 'Missing required fields', data: null };
-        }
-        const employee = this.empService.create(body);
-        return { message: 'Employee created', data: employee };
+    create(Body) {
+        return this.empService.create(Body);
     }
-    findAll() {
-        const employees = this.empService.findAll();
-        return { message: 'List of employees', data: employees };
+    getall() {
+        return this.empService.findall();
     }
 };
 exports.EmpController = EmpController;
@@ -37,7 +33,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [registerdto_1.registerdto]),
     __metadata("design:returntype", void 0)
 ], EmpController.prototype, "create", null);
 __decorate([
@@ -45,7 +41,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], EmpController.prototype, "findAll", null);
+], EmpController.prototype, "getall", null);
 exports.EmpController = EmpController = __decorate([
     (0, common_1.Controller)('emp'),
     __metadata("design:paramtypes", [emp_service_1.EmpService])

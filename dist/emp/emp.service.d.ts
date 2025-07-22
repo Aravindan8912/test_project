@@ -1,17 +1,9 @@
+import { Emp } from './emp.schema';
+import { Model } from 'mongoose';
+import { registerdto } from './registerdto/registerdto';
 export declare class EmpService {
-    private employees;
-    create(employee: {
-        username: string;
-        phonenumber: string;
-        address: string;
-    }): {
-        username: string;
-        phonenumber: string;
-        address: string;
-    };
-    findAll(): {
-        username: string;
-        phonenumber: string;
-        address: string;
-    }[];
+    private empModel;
+    constructor(empModel: Model<Emp>);
+    create(data: registerdto): Promise<Emp>;
+    findall(): Promise<Emp[]>;
 }

@@ -1,19 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { Emp } from './emp.schema';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { registerdto } from './registerdto/registerdto';
 
 @Injectable()
 export class EmpService {
-  private employees: {
-    username: string;
-    phonenumber: string;
-    address: string;
-  }[] = [];
-
-  create(employee: { username: string; phonenumber: string; address: string }) {
-    this.employees.push(employee);
-    return employee;
+  constructor(@InjectModel(Emp.name) private empModel: Model<Emp>) {}
+  async create(data: registerdto): Promise<Emp> {
+    const emp = new this.empModel(data);
+    return emp.save();
   }
 
-  findAll() {
-    return this.employees;
+  async findall(): Promise<Emp[]> {
+    return this.empModel.find().exec();
   }
 }

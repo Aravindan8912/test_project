@@ -1,25 +1,19 @@
 import { Body, Controller, Post, Get } from '@nestjs/common';
 import { EmpService } from './emp.service';
+import { registerdto } from './registerdto/registerdto';
+import { Emp } from './emp.schema';
 
 @Controller('emp')
 export class EmpController {
   constructor(private readonly empService: EmpService) {}
 
   @Post()
-  create(
-    @Body() body: { username: string; phonenumber: string; address: string },
-  ) {
-    // Basic validation (optional)
-    if (!body.username || !body.phonenumber || !body.address) {
-      return { message: 'Missing required fields', data: null };
-    }
-    const employee = this.empService.create(body);
-    return { message: 'Employee created', data: employee };
+  create(@Body() Body: registerdto) {
+    return this.empService.create(Body);
   }
 
   @Get()
-  findAll() {
-    const employees = this.empService.findAll();
-    return { message: 'List of employees', data: employees };
+  getall() {
+    return this.empService.findall();
   }
 }
