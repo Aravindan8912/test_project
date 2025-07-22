@@ -25,6 +25,8 @@ export class UsersController {
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
+
+
   // ✅ Update user
   @Put(':id')
   async updateUser(@Param('id') id: string, @Body() body: any) {
@@ -32,6 +34,8 @@ export class UsersController {
     if (!updated) throw new NotFoundException('User not found');
     return updated;
   }
+
+  
 
   // ✅ Delete user
   @Delete(':id')
